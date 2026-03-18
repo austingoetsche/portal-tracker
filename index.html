@@ -454,6 +454,17 @@ const APPS_URL='https://script.google.com/macros/s/AKfycbwt8QJeJXVKOCSR2IAnd-hkT
 const D1_URL=APPS_URL+'?sheet=Portal_View';
 const D2_URL=APPS_URL+'?sheet=D2_Portal_View';
 const PLAYER_COLORS=['#f0b429','#4da6ff','#4fffb0','#c084fc'];
+const NUM_COLS = [
+  'Points/Game',
+  'Reb/Game',
+  'Ast/Game',
+  'TS%',
+  'eFG%',
+  '3P%',
+  'FT%',
+  'DRtg',
+  'RAPM'
+];
 let db={d1:[],d2:[]};
 let sortState={d1:{key:'WARP',dir:-1},d2:{key:'WARP',dir:-1}};
 let compareSlots=[null,null,null,null];
