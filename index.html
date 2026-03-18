@@ -515,16 +515,31 @@ function parseRow(row) {
   return o;
 }
 
-function loadSheet(url) {
-  return new Promise((res, rej) => {
-    Papa.parse(url, {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      complete: r => res(r.data.map(parseRow)),
-      error: e => rej(e)
+async function loadSheet(url) {
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+
+    console.log("RAW TEXT:", text.slice(0, 200)); // debug
+
+    return new Promise((resolve, reject) => {
+      Papa.parse(text, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (results) => {
+          console.log("PARSED:", results.data.slice(0, 3)); // debug
+          resolve(results.data.map(parseRow));
+        },
+        error: (err) => {
+          console.error("PAPA ERROR:", err);
+          reject(err);
+        },
+      });
     });
-  });
+  } catch (err) {
+    console.error("FETCH ERROR:", err);
+    throw err;
+  }
 }
 
 function setSyncState(s){
