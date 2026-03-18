@@ -528,7 +528,7 @@ async function loadSheet(url) {
         skipEmptyLines: true,
         complete: (results) => {
           console.log("PARSED:", results.data.slice(0, 3)); // debug
-          resolve(results.data.map(parseRow));
+          resolve(results.data);
         },
         error: (err) => {
           console.error("PAPA ERROR:", err);
